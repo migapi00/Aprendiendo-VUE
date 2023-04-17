@@ -8,16 +8,15 @@
 </head>
 <body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.30/vue.global.min.js"></script>
-     
-
-    <div id="app"> {{ text }}</div>
+    <div id="app"></div>
     <script>
         const vm = Vue.createApp({
             data() {
                 return {
-                    text: "Hola Vue"
+                    img: "https://images.ecestaticos.com/uAwmWTTMm6JDmJApD23hexANed8=/74x0:2640x1809/992x700/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2F75e%2Fbd0%2F4f8%2F75ebd04f88e88b3095e0148c7f10a739.jpg"
                 };
-            }
+            },
+            template:`<img v-bind:src="img" v-bind:alt="img">`
         }).mount('#app');
         
     </script>
