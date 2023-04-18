@@ -13,10 +13,21 @@
         const vm = Vue.createApp({
             data() {
                 return {
-                    img: "https://images.ecestaticos.com/uAwmWTTMm6JDmJApD23hexANed8=/74x0:2640x1809/992x700/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2F75e%2Fbd0%2F4f8%2F75ebd04f88e88b3095e0148c7f10a739.jpg"
+                    counter : 0
                 };
             },
-            template:`<img v-bind:src="img" v-bind:alt="img">`
+            methods: {
+                increment() {
+                    this.counter++;
+                },
+                decrement() {
+                    this.counter--;
+                }
+            },
+            template:` <h1> {{ counter}} </h1>
+            <button v-on:click="increment">+</button>
+            <button v-on:click="decrement">-</button>
+            ` 
         }).mount('#app');
         
     </script>
