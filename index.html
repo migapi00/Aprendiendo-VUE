@@ -27,12 +27,13 @@
                 <p>{{ text }}</p>
                 <input 
                     type="text" 
-                    v-on:input="input"
-                    v-bind:value="text"
+                    @input="input"
+                    :value="text"
                 >
             ` 
         }).mount('#app');
-        
+    // v-on: es igual a @
+    // v-bind: es igual a :
     </script>
     
 </body>
