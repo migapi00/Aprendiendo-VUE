@@ -9,97 +9,52 @@
 <body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.30/vue.global.min.js"></script>
     <div id="app"></div>
+    
     <script>
         const app = Vue.createApp({
-            data() {
-                return {
-                    text: "Accede a tu cuenta",
-                    open: false,
-                    username: "",
-                    posts: [
-                        {
-                        title: "Título 1",
-                        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore quidem doloremque nesciunt consequuntur vel tempore temporibus officiis odit saepe, quia sit laborum perspiciatis aliquid deserunt earum laudantium quam cupiditate ea."
-                        },
-                        {
-                        title: "Título 2",
-                        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore quidem doloremque nesciunt consequuntur vel tempore temporibus officiis odit saepe, quia sit laborum perspiciatis aliquid deserunt earum laudantium quam cupiditate ea."
-                        },
-                        {
-                        title: "Título 3",
-                        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore quidem doloremque nesciunt consequuntur vel tempore temporibus officiis odit saepe, quia sit laborum perspiciatis aliquid deserunt earum laudantium quam cupiditate ea."
-                        },
-                        {
-                        title: "Título 4",
-                        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore quidem doloremque nesciunt consequuntur vel tempore temporibus officiis odit saepe, quia sit laborum perspiciatis aliquid deserunt earum laudantium quam cupiditate ea."
-                        }
-                    ]
-                };
-            },
-            watch: {
-                open (value) {
-                    if (value) {
-                        this.text = "Cierra sesión";
-                    } else {
-                        this.text = "Accede a tu cuenta";
-                        this.username="";
-                    }      
-                } 
-            },
-            computed: {
-                label() {
-                    return this.open ? "salir" : "acceder";
-                },
-                styles() {
-                    return this.open ? ['open'] : ['closed'];
-                }
-            },
             template: ` 
-            <div class="container":class="styles">
-                <h2> {{ text }} </h2>
-                <div v-if="open">
-                    <p>Hola, {{username}}</p>
-                    <div class="list">
-                       <item 
-                            v-for="(item, i) in posts"
-                            :key="i"
-                            :post="item"
-                       />
-                    </div>
-                </div>
-            
-                <div v-else="open">
-                    <div>Username</div>
-                    <input type="text" v-model="username"/>
-                </div>
-                <button @click = "open = !open"> 
-                    <div v-if="!open">Acceder</div>
-                    <div v-else>Salir</div>
-                </button>
-            </div>          
-            ` 
-        })
-        
-        app.component("item", {
-            props: ["post"],
-            template: `
-            <div class="item">
-                <div class="title"> {{post.title}}</div>
-                <p>{{post.description}}</p>
+            <div>
+                <v-layout>
+                    <template v-slot:header>
+                        <button>Título</button>
+                    </template>
+
+                    <template v-slot:contenido>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil ut tempora officiis natus similique itaque, eveniet aliquam possimus error ullam, nobis cum quos eaque, a asperiores voluptatem maiores ducimus? Adipisci!
+                        </p>
+                    </template>
+                </v-layout>
             </div>
-            `
-        })
+            
+            ` 
+        });
+        app.component('v-layout', {
+        template: `<header class="header"> 
+                        <slot name="header"></slot>
+                    </header>
+                    <div class="contenido">
+                        <slot name="contenido"> </slot>
+                    </div>`
+    });
+
+
         const vm = app.mount('#app');
     
     </script>
-    
     <style>
-        html, body {
-            height: 100vh;
-            margin: 0;
-            font-family: Arial, Helvetica, sans-serif;
+        .header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin-top: 24px;
+            border: none;
+            background-color: rgb(114, 233, 23);
+            padding: 8px 24px;
+            border-radius: 12px;
         }
-        #app, .container {
+        .contenido {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -107,31 +62,6 @@
             width: 100%;
             height: 100%;
         }
-        button {
-            margin-top: 24px;
-            border: none;
-            background-color: white;
-            padding: 8px 24px;
-            border-radius: 12px;
-        }
-        .closed {
-            background-color: #eca1a6;
-        }
-        .open {
-            background-color: #b5e7a0;
-        }
-        .list {
-            display: flex;
-            flex-direction: column;
-        }
-        .item {
-            border: 1px solid;
-        }
-        .title {
-            font-weight: bold;
-            font-size: 1rem;
-        }
     </style>
-    
 </body>
 </html>
