@@ -12,32 +12,32 @@
     
     <script>
         const app = Vue.createApp({
+            data(){
+                return{
+                    items: [ "uno", "dos", "tres", , ]
+                };
+                
+            },
             template: ` 
-            <div>
-                <v-layout>
-                    <template v-slot:header>
-                        <button>Título</button>
-                    </template>
-
-                    <template v-slot:contenido>
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil ut tempora officiis natus similique itaque, eveniet aliquam possimus error ullam, nobis cum quos eaque, a asperiores voluptatem maiores ducimus? Adipisci!
-                        </p>
-                    </template>
-                </v-layout>
-            </div>
+                <ul>
+                    <v-item v-for="item in items" v-bind:text="item"></v-item>    
+                    
+                </ul>
             
             ` 
         });
-        app.component('v-layout', {
-        template: `<header class="header"> 
-                        <slot name="header"></slot>
-                    </header>
-                    <div class="contenido">
-                        <slot name="contenido"> </slot>
-                    </div>`
-    });
-
+        
+        app.component("v-item", {
+            props: {
+                text:{
+                    default: "Mil"
+                }
+                
+            },
+            template:`
+                <li>{{ text }}</li>
+            `
+        })
 
         const vm = app.mount('#app');
     
